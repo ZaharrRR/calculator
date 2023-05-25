@@ -40,18 +40,17 @@ print("Сумма ваших баллов: ", score)
 # проверка на прохождение на бюджет 
 def satisfies_budget_condition(block, scores):
     budget = block['exam_scores']['budget']
-    if budget == '-':
-        return False
-    return int(budget.split('/')[0]) >= scores
+    return int(budget.split('/')[0]) <= scores and int(budget.split('/')[0]) != 0
 
 with open('data.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
 
-for block in data:
+for block in data[0][str(json_oblect)]:
     if satisfies_budget_condition(block, score):
         print(f"{block['code']} {block['name']}")
         print(f"проход.балл/кол-во мест")
         print(f"Договор: {block['exam_scores']['contract']}")
         print(f"Бюджет: {block['exam_scores']['budget']}\n")
+
 
